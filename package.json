@@ -16,6 +16,9 @@
   ],
   "author": "MJH",
   "dependencies": {
-    "gulp": "^3.9.1"
+    "fs": "0.0.2",
+    "gulp": "^3.9.1",
+    "gulp-util": "^3.0.7",
+    "object-assign": "^4.1.0"
   }
 }
