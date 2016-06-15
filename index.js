@@ -53,7 +53,7 @@ function checkModuleVersion(options) {
     }
 }
 
-module.exports.checkVersion = checkModuleVersion;
+module.exports.equalVersionModule = checkModuleVersion;
 
 checkModuleVersion({
     dependencies: true,
