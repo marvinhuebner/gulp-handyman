@@ -3,11 +3,13 @@
 var gulp = require('gulp'),
 	plumber = require('gulp-plumber'),
 	sourcemaps = require('gulp-sourcemaps'),
-	sass = require('gulp-sass'),
-	autoprefixer = require('gulp-autoprefixer'),
+	concat = require('gulp-concat'),
+	uglify = require('gulp-uglify'),
+	babel = require('gulp-babel'),
+	gulpif = require('gulp-if'),
 	assign = require('object-assign');
 
-function handymanSass(options) {
+function handymanJS(options) {
 	if (typeof options === 'undefined') {
 		throw new Error('It requires a settings object');
 	}
@@ -22,25 +24,20 @@ function handymanSass(options) {
 
 	options = assign({
 		srcPath: '',
+		fileName: '',
 		destPath: '',
 		minify: false
 	}, options);
 
-	var sassOutputStyle;
-
-	if (options.minify == false) {
-		sassOutputStyle = 'expanded';
-	} else {
-		sassOutputStyle = 'compressed';
-	}
 
 	return gulp.src(options.srcPath)
 		.pipe(plumber())
 		.pipe(sourcemaps.init())
-		.pipe(sass({outputStyle: sassOutputStyle}))
-		.pipe(autoprefixer())
+		.pipe(babel())
+		.pipe(concat(options.fileName + '.js'))
+		.pipe(gulpif(options.minify, uglify()))
 		.pipe(sourcemaps.write('./'))
 		.pipe(gulp.dest(options.destPath));
 }
 
-module.exports.handymanSass = handymanSass;
+module.exports.handymanJS = handymanJS;
