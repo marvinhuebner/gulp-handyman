@@ -2,20 +2,16 @@
 
 var gulp = require('gulp'),
 	plumber = require('gulp-plumber'),
-	sourcemaps = require('gulp-sourcemaps'),
-	concat = require('gulp-concat'),
-	uglify = require('gulp-uglify'),
-	babel = require('gulp-babel'),
-	gulpif = require('gulp-if'),
+	pug = require('gulp-pug'),
 	assign = require('object-assign');
 
-function handymanJS(options) {
+function handymanPug(options) {
 	if (typeof options === 'undefined') {
 		throw new Error('It requires a settings object');
 	}
 
 	if (typeof options.srcPath === 'undefined') {
-		throw new Error('You need to define an source path');
+		throw new Error('You need to define a source path');
 	}
 
 	if (typeof options.destPath === 'undefined') {
@@ -24,20 +20,24 @@ function handymanJS(options) {
 
 	options = assign({
 		srcPath: '',
-		fileName: '',
 		destPath: '',
 		minify: false
 	}, options);
 
+	var pugOutputStyle;
 
-	return gulp.src(options.srcPath)
+	if (options.minify == false) {
+		pugOutputStyle = true;
+	} else {
+		pugOutputStyle = false;
+	}
+
+	gulp.src(options.srcPath + '/!(_)*.pug')
 		.pipe(plumber())
-		.pipe(sourcemaps.init())
-		.pipe(babel())
-		.pipe(concat(options.fileName + '.js'))
-		.pipe(gulpif(options.minify, uglify()))
-		.pipe(sourcemaps.write('./'))
+		.pipe(pug({
+			pretty: pugOutputStyle
+		}))
 		.pipe(gulp.dest(options.destPath));
 }
 
-module.exports.gulpJs = handymanJS;
+module.exports.gulpPug = handymanPug;

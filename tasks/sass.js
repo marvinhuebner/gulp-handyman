@@ -13,7 +13,7 @@ function handymanSass(options) {
 	}
 
 	if (typeof options.srcPath === 'undefined') {
-		throw new Error('You need to define an source path');
+		throw new Error('You need to define a source path');
 	}
 
 	if (typeof options.destPath === 'undefined') {
@@ -43,4 +43,4 @@ function handymanSass(options) {
 		.pipe(gulp.dest(options.destPath));
 }
 
-module.exports.handymanSass = handymanSass;
+module.exports.gulpSass = handymanSass;
