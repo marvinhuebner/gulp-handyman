@@ -7,6 +7,7 @@ var handymanPug = require('./tasks/pug.js');
 var handymanImgMin = require('./tasks/imgMin.js');
 var handymanIconFont = require('./tasks/iconFont.js');
 var handymanFavicon = require('./tasks/favicon.js');
+var handymanSvgSprite = require('./tasks/svgSprite.js');
 
 // Function for testing of version in package.json is the same as in the node modules folder
 module.exports.checkEqualVersion = check.equalVersionModule;
@@ -22,3 +23,5 @@ module.exports.gulpImgMin = handymanImgMin.gulpImgMin;
 module.exports.gulpIconFont = handymanIconFont.gulpIconFont;
 
 module.exports.gulpFavicon = handymanFavicon.gulpFavicon;
+
+module.exports.gulpSvgSprite = handymanSvgSprite.gulpSvgSprite;
