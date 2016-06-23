@@ -2,10 +2,11 @@
 
 var gulp = require('gulp'),
 	plumber = require('gulp-plumber'),
-	pug = require('gulp-pug'),
+	imagemin = require('gulp-imagemin'),
+	pngquant = require('imagemin-pngquant'),
 	assign = require('object-assign');
 
-function handymanPug(options) {
+function handymanImgMin(options) {
 	if (typeof options === 'undefined') {
 		throw new Error('It requires a settings object');
 	}
@@ -20,24 +21,16 @@ function handymanPug(options) {
 
 	options = assign({
 		srcPath: '',
-		destPath: '',
-		minify: false
+		destPath: ''
 	}, options);
 
-	var pugOutputStyle;
-
-	if (options.minify == false) {
-		pugOutputStyle = true;
-	} else {
-		pugOutputStyle = false;
-	}
-
-	return gulp.src(options.srcPath + '/!(_)*.pug')
+	return gulp.src(options.srcPath + '/*')
 		.pipe(plumber())
-		.pipe(pug({
-			pretty: pugOutputStyle
+		.pipe(imagemin({
+			progressive: true,
+			use: [pngquant()]
 		}))
 		.pipe(gulp.dest(options.destPath));
 }
 
-module.exports.gulpPug = handymanPug;
+module.exports.gulpImgMin = handymanImgMin;
