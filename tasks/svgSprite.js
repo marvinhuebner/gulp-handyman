@@ -5,6 +5,7 @@ var gulp = require('gulp'),
 	svgSprite = require('gulp-svg-sprite'),
 	assign = require('object-assign');
 
+
 function handymanSvgSprite(options) {
 	if (typeof options === 'undefined') {
 		throw new Error('It requires a settings object');
@@ -23,9 +24,44 @@ function handymanSvgSprite(options) {
 		destPath: ''
 	}, options);
 
-	return gulp.src(options.srcPath)
-		.pipe(plumber())
-		.pipe(svgSprite())
+	var config;
+
+	config = {
+		shape: {
+			dimension: {         // Set maximum dimensions
+				maxWidth: 32,
+				maxHeight: 32
+			},
+			spacing: {         // Add padding
+				padding: 10
+			},
+			dest: 'out/intermediate-svg'    // Keep the intermediate files
+		},
+		mode: {
+			css: {
+				dest: "./",
+				layout: "diagonal",
+				sprite: paths.sprite.svg,
+				bust: false,
+				render: {
+					scss: {
+						dest: "css/src/_sprite.scss",
+						template: "build/tpl/sprite-template.scss"
+					}
+				}
+			}
+		},
+
+		variables: {
+			mapname: "icons"
+		},
+
+		symbol: true
+	};
+
+
+	return gulp.src(options.srcPath + '/*.svg')
+		.pipe(svgSprite(config))
 		.pipe(gulp.dest(options.destPath));
 
 }
