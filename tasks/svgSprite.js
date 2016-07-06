@@ -21,42 +21,36 @@ function handymanSvgSprite(options) {
 
 	options = assign({
 		srcPath: '',
-		destPath: ''
+		destPath: '',
+		destPathSymbolSprite: '',
+		destPathScss: ''
 	}, options);
 
 	var config;
 
 	config = {
 		shape: {
-			dimension: {         // Set maximum dimensions
+			dimension: {
 				maxWidth: 32,
 				maxHeight: 32
 			},
-			spacing: {         // Add padding
-				padding: 10
-			},
-			dest: 'out/intermediate-svg'    // Keep the intermediate files
+			spacing: {
+				padding: 5
+			}
 		},
 		mode: {
 			css: {
-				dest: "./",
-				layout: "diagonal",
-				sprite: paths.sprite.svg,
-				bust: false,
+				bust: true,
+				prefix: "@mixin sprite-%s",
 				render: {
 					scss: {
-						dest: "css/src/_sprite.scss",
-						template: "build/tpl/sprite-template.scss"
+						template: 'node_modules/gulp-handyman/template/svgSprite.handlebars'
 					}
 				}
-			}
-		},
+			},
 
-		variables: {
-			mapname: "icons"
-		},
-
-		symbol: true
+			symbol: true
+		}
 	};
 
 

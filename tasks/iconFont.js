@@ -56,7 +56,7 @@ function handymanIconFont(iconFontOptions, done) {
 				.pipe(consolidate('lodash', {
 					glyphs: glyphs,
 					fontName: iconFontOptions.fontName,
-					fontPath: iconFontOptions.cssFontPath,
+					fontPath: iconFontOptions.cssFontPath + '/',
 					className: iconFontOptions.cssClassName
 				}))
 				.pipe(rename(iconFontOptions.sassFileName))

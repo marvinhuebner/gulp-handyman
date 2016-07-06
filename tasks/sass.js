@@ -5,6 +5,8 @@ var gulp = require('gulp'),
 	sourcemaps = require('gulp-sourcemaps'),
 	sass = require('gulp-sass'),
 	autoprefixer = require('gulp-autoprefixer'),
+	rename = require('gulp-rename'),
+	gulpif = require('gulp-if'),
 	assign = require('object-assign');
 
 function handymanSass(options) {
@@ -23,8 +25,17 @@ function handymanSass(options) {
 	options = assign({
 		srcPath: '',
 		destPath: '',
-		minify: false
+		minify: false,
+		fileName: ''
 	}, options);
+
+	var fileNameRename;
+
+	if (typeof options.fileName === 'undefined') {
+		fileNameRename = false;
+	} else {
+		fileNameRename = true;
+	}
 
 	var sassOutputStyle;
 
@@ -39,6 +50,7 @@ function handymanSass(options) {
 		.pipe(sourcemaps.init())
 		.pipe(sass({outputStyle: sassOutputStyle}))
 		.pipe(autoprefixer())
+		.pipe(gulpif(fileNameRename, rename(options.fileName + '.css')))
 		.pipe(sourcemaps.write('./'))
 		.pipe(gulp.dest(options.destPath));
 }

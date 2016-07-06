@@ -34,9 +34,7 @@ function handymanJS(options) {
 	return gulp.src(options.srcPath)
 		.pipe(plumber())
 		.pipe(sourcemaps.init())
-		.pipe(gulpif(options.babel, babel({
-			presets: ['es2015']
-		})))
+		.pipe(gulpif(options.babel, babel()))
 		.pipe(concat(options.fileName + '.js'))
 		.pipe(gulpif(options.minify, uglify()))
 		.pipe(sourcemaps.write('./'))
