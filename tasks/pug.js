@@ -33,7 +33,12 @@ function handymanPug(options) {
 	}
 
 	return gulp.src(options.srcPath + '/!(_)*.pug')
-		.pipe(plumber())
+		.pipe(plumber({
+			errorHandler: function(err) {
+				console.log(err);
+				this.emit('end');
+			}
+		}))
 		.pipe(pug({
 			pretty: pugOutputStyle
 		}))

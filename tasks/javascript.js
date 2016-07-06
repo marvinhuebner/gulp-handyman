@@ -32,7 +32,12 @@ function handymanJS(options) {
 
 
 	return gulp.src(options.srcPath)
-		.pipe(plumber())
+		.pipe(plumber({
+			errorHandler: function(err) {
+				console.log(err);
+				this.emit('end');
+			}
+		}))
 		.pipe(sourcemaps.init())
 		.pipe(gulpif(options.babel, babel()))
 		.pipe(concat(options.fileName + '.js'))
