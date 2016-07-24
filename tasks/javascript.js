@@ -7,7 +7,8 @@ var gulp = require('gulp'),
 	uglify = require('gulp-uglify'),
 	babel = require('gulp-babel'),
 	gulpif = require('gulp-if'),
-	assign = require('object-assign');
+	assign = require('object-assign'),
+	es2015Preset = require('babel-preset-es2015');
 
 function handymanJS(options) {
 	if (typeof options === 'undefined') {
@@ -39,7 +40,7 @@ function handymanJS(options) {
 			}
 		}))
 		.pipe(sourcemaps.init())
-		.pipe(gulpif(options.babel, babel()))
+		.pipe(gulpif(options.babel, babel({"presets": [es2015Preset]})))
 		.pipe(concat(options.fileName + '.js'))
 		.pipe(gulpif(options.minify, uglify()))
 		.pipe(sourcemaps.write('./'))
