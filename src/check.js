@@ -49,14 +49,15 @@ function checkModuleVersion(options) {
 		projectVersion = projectPackageJson.devDependencies[options.module];
 	}
 
-	var projectVersionOnly = projectVersion.replace(/[\^]|[\~]|[\#]/, "");
+	var projectVersionOnly = projectVersion.replace(/[\^]|[\~]|[\#]|[\+]|[\:]|[\/]|[\.]|[\-]|[a-z]/g, "");
 
 	var moduleVerson = modulePackageJson.version;
 
-	if (projectVersionOnly != moduleVerson) {
+	var moduleVersionOnly = moduleVerson.replace(/[\^]|[\~]|[\#]|[\+]|[\:]|[\/]|[\.]|[\-]|[a-z]/g, "");
+
+	if (projectVersionOnly != moduleVersionOnly) {
 		throw new Error(gutil.colors.red('ERROR: ') + gutil.colors.cyan(options.module) + ' version is not equal to ' + gutil.colors.cyan(options.module) + ' in your node_modules folder\n\n');
 	}
 }
-
 
 module.exports.equalVersionModule = checkModuleVersion;
