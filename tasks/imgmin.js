@@ -25,12 +25,7 @@ function handymanImgMin(options) {
 	}, options);
 
 	return gulp.src(options.pathToSrc + '/*')
-		.pipe(plumber({
-			errorHandler: function(err) {
-				console.log(err);
-				this.emit('end');
-			}
-		}))
+		.pipe(plumber())
 		.pipe(imagemin({
 			progressive: true,
 			use: [pngquant()]
