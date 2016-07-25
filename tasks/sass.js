@@ -26,7 +26,8 @@ function handymanSass(options) {
 		srcPath: '',
 		destPath: '',
 		minify: false,
-		fileName: ''
+		fileName: '',
+		sourcemaps: true
 	}, options);
 
 	var fileNameRename;
@@ -52,11 +53,11 @@ function handymanSass(options) {
 				this.emit('end');
 			}
 		}))
-		.pipe(sourcemaps.init())
+		.pipe(gulpif(options.sourcemaps, sourcemaps.init()))
 		.pipe(sass({outputStyle: sassOutputStyle}))
 		.pipe(autoprefixer())
 		.pipe(gulpif(fileNameRename, rename(options.fileName + '.css')))
-		.pipe(sourcemaps.write('./'))
+		.pipe(gulpif(options.sourcemaps, sourcemaps.write('./')))
 		.pipe(gulp.dest(options.destPath));
 }
 

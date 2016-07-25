@@ -28,7 +28,8 @@ function handymanJS(options) {
 		fileName: '',
 		destPath: '',
 		minify: false,
-		babel: false
+		babel: false,
+		sourcemaps: true
 	}, options);
 
 
@@ -39,11 +40,11 @@ function handymanJS(options) {
 				this.emit('end');
 			}
 		}))
-		.pipe(sourcemaps.init())
+		.pipe(gulpif(options.sourcemaps, sourcemaps.init()))
 		.pipe(gulpif(options.babel, babel({"presets": [es2015Preset]})))
 		.pipe(concat(options.fileName + '.js'))
 		.pipe(gulpif(options.minify, uglify()))
-		.pipe(sourcemaps.write('./'))
+		.pipe(gulpif(options.sourcemaps, sourcemaps.write('./')))
 		.pipe(gulp.dest(options.destPath));
 }
 
