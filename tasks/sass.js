@@ -14,17 +14,17 @@ function handymanSass(options) {
 		throw new Error('It requires a settings object');
 	}
 
-	if (typeof options.srcPath === 'undefined') {
+	if (typeof options.pathToSrc === 'undefined') {
 		throw new Error('You need to define a source path');
 	}
 
-	if (typeof options.destPath === 'undefined') {
+	if (typeof options.pathToDest === 'undefined') {
 		throw new Error('You need to define an destination path');
 	}
 
 	options = assign({
-		srcPath: '',
-		destPath: '',
+		pathToSrc: '',
+		pathToDest: '',
 		minify: false,
 		fileName: '',
 		sourcemaps: true
@@ -46,7 +46,7 @@ function handymanSass(options) {
 		sassOutputStyle = 'compressed';
 	}
 
-	return gulp.src(options.srcPath)
+	return gulp.src(options.pathToSrc)
 		.pipe(plumber({
 			errorHandler: function(err) {
 				console.log(err);
@@ -58,7 +58,7 @@ function handymanSass(options) {
 		.pipe(autoprefixer())
 		.pipe(gulpif(fileNameRename, rename(options.fileName + '.css')))
 		.pipe(gulpif(options.sourcemaps, sourcemaps.write('./')))
-		.pipe(gulp.dest(options.destPath));
+		.pipe(gulp.dest(options.pathToDest));
 }
 
 module.exports.gulpSass = handymanSass;

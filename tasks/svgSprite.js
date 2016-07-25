@@ -11,19 +11,19 @@ function handymanSvgSprite(options) {
 		throw new Error('It requires a settings object');
 	}
 
-	if (typeof options.srcPath === 'undefined') {
+	if (typeof options.pathToSrc === 'undefined') {
 		throw new Error('You need to define a source path');
 	}
 
-	if (typeof options.destPath === 'undefined') {
+	if (typeof options.pathToDest === 'undefined') {
 		throw new Error('You need to define an destination path');
 	}
 
 	options = assign({
-		srcPath: '',
-		destPath: '',
-		destPathSymbolSprite: '',
-		destPathScss: ''
+		pathToSrc: '',
+		pathToDest: '',
+		pathToDestSymbolSprite: '',
+		pathToDestScss: ''
 	}, options);
 
 	var config;
@@ -54,9 +54,9 @@ function handymanSvgSprite(options) {
 	};
 
 
-	return gulp.src(options.srcPath + '/*.svg')
+	return gulp.src(options.pathToSrc + '/*.svg')
 		.pipe(svgSprite(config))
-		.pipe(gulp.dest(options.destPath));
+		.pipe(gulp.dest(options.pathToDest));
 
 }
 

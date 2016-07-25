@@ -13,7 +13,7 @@ function handymanIconFont(iconFontOptions, done) {
 		throw new Error('It requires a settings object');
 	}
 
-	if (typeof iconFontOptions.srcPath === 'undefined') {
+	if (typeof iconFontOptions.pathToSrc === 'undefined') {
 		throw new Error('You need to define an source path');
 	}
 
@@ -21,30 +21,30 @@ function handymanIconFont(iconFontOptions, done) {
 		throw new Error('You need to define an path for your css file');
 	}
 
-	if (typeof iconFontOptions.destPathIconFont === 'undefined') {
+	if (typeof iconFontOptions.pathToDestIconFont === 'undefined') {
 		throw new Error('You need to define a dest path for the fonts');
 	}
 
-	if (typeof iconFontOptions.destPathIconFontSass === 'undefined') {
+	if (typeof iconFontOptions.pathToDestIconFontSass === 'undefined') {
 		throw new Error('You need to define a dest path for the sass');
 	}
 
 	iconFontOptions = assign({
-		srcPath: null,
+		pathToSrc: null,
 		templatePath: 'node_modules/gulp-handyman/template/iconFont.txt',
 		fontName: 'icon',
 		cssFontPath: null,
 		cssClassName: 'icon',
 		sassFileName: '_iconfont.scss',
-		destPathIconFont: null,
-		destPathIconFontSass: null,
+		pathToDestIconFont: null,
+		pathToDestIconFontSass: null,
 		fontFormats: ['ttf', 'eot', 'woff']
 	}, iconFontOptions);
 
 
 	var runTimestamp = Math.round(Date.now()/1000);
 
-	return gulp.src([iconFontOptions.srcPath + '/*.svg'])
+	return gulp.src([iconFontOptions.pathToSrc + '/*.svg'])
 		.pipe(iconfont({
 			fontName: iconFontOptions.fontName, // required
 			prependUnicode: true,
@@ -60,9 +60,9 @@ function handymanIconFont(iconFontOptions, done) {
 					className: iconFontOptions.cssClassName
 				}))
 				.pipe(rename(iconFontOptions.sassFileName))
-				.pipe(gulp.dest(iconFontOptions.destPathIconFontSass));
+				.pipe(gulp.dest(iconFontOptions.pathToDestIconFontSass));
 		})
-		.pipe(gulp.dest(iconFontOptions.destPathIconFont));
+		.pipe(gulp.dest(iconFontOptions.pathToDestIconFont));
 }
 
 module.exports.gulpIconFont = handymanIconFont;

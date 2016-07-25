@@ -9,24 +9,24 @@ function handymanFavicon(options) {
 		throw new Error('It requires a settings object');
 	}
 
-	if (typeof options.srcPath === 'undefined') {
+	if (typeof options.pathToSrc === 'undefined') {
 		throw new Error('You need to define a source path');
 	}
 
-	if (typeof options.destPath === 'undefined') {
+	if (typeof options.pathToDest === 'undefined') {
 		throw new Error('You need to define an destination path');
 	}
 
 	options = assign({
-		srcPath: '',
-		destPath: ''
+		pathToSrc: '',
+		pathToDest: ''
 	}, options);
 
-	return gulp.src([options.srcPath])
+	return gulp.src([options.pathToSrc])
 		.pipe(favicons({
 			files: {
-				src: options.srcPath,
-				dest: options.destPath,
+				src: options.pathToSrc,
+				dest: options.pathToDest,
 				iconsPath: '/Icons/',
 				html: '/dev/null'
 			},
@@ -47,7 +47,7 @@ function handymanFavicon(options) {
 				background: false
 			}
 		}))
-		.pipe(gulp.dest(options.destPath));
+		.pipe(gulp.dest(options.pathToDest));
 }
 
 module.exports.gulpFavicon = handymanFavicon;

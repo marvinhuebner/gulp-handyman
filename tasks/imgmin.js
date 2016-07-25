@@ -11,26 +11,26 @@ function handymanImgMin(options) {
 		throw new Error('It requires a settings object');
 	}
 
-	if (typeof options.srcPath === 'undefined') {
+	if (typeof options.pathToSrc === 'undefined') {
 		throw new Error('You need to define a source path');
 	}
 
-	if (typeof options.destPath === 'undefined') {
+	if (typeof options.pathToDest === 'undefined') {
 		throw new Error('You need to define an destination path');
 	}
 
 	options = assign({
-		srcPath: '',
-		destPath: ''
+		pathToSrc: '',
+		pathToDest: ''
 	}, options);
 
-	return gulp.src(options.srcPath + '/*')
+	return gulp.src(options.pathToSrc + '/*')
 		.pipe(plumber())
 		.pipe(imagemin({
 			progressive: true,
 			use: [pngquant()]
 		}))
-		.pipe(gulp.dest(options.destPath));
+		.pipe(gulp.dest(options.pathToDest));
 }
 
 module.exports.gulpImgMin = handymanImgMin;

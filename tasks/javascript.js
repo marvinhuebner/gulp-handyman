@@ -15,25 +15,25 @@ function handymanJS(options) {
 		throw new Error('It requires a settings object');
 	}
 
-	if (typeof options.srcPath === 'undefined') {
+	if (typeof options.pathToSrc === 'undefined') {
 		throw new Error('You need to define an source path');
 	}
 
-	if (typeof options.destPath === 'undefined') {
+	if (typeof options.pathToDest === 'undefined') {
 		throw new Error('You need to define an destination path');
 	}
 
 	options = assign({
-		srcPath: '',
+		pathToSrc: '',
 		fileName: '',
-		destPath: '',
+		pathToDest: '',
 		minify: false,
 		babel: false,
 		sourcemaps: true
 	}, options);
 
 
-	return gulp.src(options.srcPath)
+	return gulp.src(options.pathToSrc)
 		.pipe(plumber({
 			errorHandler: function(err) {
 				console.log(err);
@@ -45,7 +45,7 @@ function handymanJS(options) {
 		.pipe(concat(options.fileName + '.js'))
 		.pipe(gulpif(options.minify, uglify()))
 		.pipe(gulpif(options.sourcemaps, sourcemaps.write('./')))
-		.pipe(gulp.dest(options.destPath));
+		.pipe(gulp.dest(options.pathToDest));
 }
 
 module.exports.gulpJs = handymanJS;

@@ -10,17 +10,17 @@ function handymanPug(options) {
 		throw new Error('It requires a settings object');
 	}
 
-	if (typeof options.srcPath === 'undefined') {
+	if (typeof options.pathToSrc === 'undefined') {
 		throw new Error('You need to define a source path');
 	}
 
-	if (typeof options.destPath === 'undefined') {
+	if (typeof options.pathToDest === 'undefined') {
 		throw new Error('You need to define an destination path');
 	}
 
 	options = assign({
-		srcPath: '',
-		destPath: '',
+		pathToSrc: '',
+		pathToDest: '',
 		minify: false
 	}, options);
 
@@ -32,7 +32,7 @@ function handymanPug(options) {
 		pugOutputStyle = false;
 	}
 
-	return gulp.src(options.srcPath + '/!(_)*.pug')
+	return gulp.src(options.pathToSrc + '/!(_)*.pug')
 		.pipe(plumber({
 			errorHandler: function(err) {
 				console.log(err);
@@ -42,7 +42,7 @@ function handymanPug(options) {
 		.pipe(pug({
 			pretty: pugOutputStyle
 		}))
-		.pipe(gulp.dest(options.destPath));
+		.pipe(gulp.dest(options.pathToDest));
 }
 
 module.exports.gulpPug = handymanPug;
