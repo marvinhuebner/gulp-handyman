@@ -1,13 +1,13 @@
 'use strict';
 
-var gulp = require('gulp'),
-	plumber = require('gulp-plumber'),
-	sourcemaps = require('gulp-sourcemaps'),
-	sass = require('gulp-sass'),
-	autoprefixer = require('gulp-autoprefixer'),
-	rename = require('gulp-rename'),
-	gulpif = require('gulp-if'),
-	assign = require('object-assign');
+const gulp = require('gulp');
+const plumber = require('gulp-plumber');
+const sourcemaps = require('gulp-sourcemaps');
+const sass = require('gulp-sass');
+const autoprefixer = require('gulp-autoprefixer');
+const rename = require('gulp-rename');
+const gulpif = require('gulp-if');
+const assign = require('object-assign');
 
 function handymanSass(options) {
 	if (typeof options === 'undefined') {
@@ -30,7 +30,7 @@ function handymanSass(options) {
 		sourcemaps: true
 	}, options);
 
-	var fileNameRename;
+	let fileNameRename;
 
 	if (typeof options.fileName === 'undefined') {
 		fileNameRename = false;
@@ -38,7 +38,7 @@ function handymanSass(options) {
 		fileNameRename = true;
 	}
 
-	var sassOutputStyle;
+	let sassOutputStyle;
 
 	if (options.minify == false) {
 		sassOutputStyle = 'expanded';

@@ -1,8 +1,8 @@
 'use strict';
 
-var fs = require('fs'),
-	assign = require('object-assign'),
-	gutil = require('gulp-util');
+const fs = require('fs');
+const assign = require('object-assign');
+const gutil = require('gulp-util');
 
 
 function checkModuleVersion(options) {
@@ -36,8 +36,8 @@ function checkModuleVersion(options) {
 		throw new Error('You can only set dependencies or devDependencies, not both at the same time');
 	}
 
-	var projectPackageJson = JSON.parse(fs.readFileSync('package.json'));
-	var modulePackageJson = JSON.parse(fs.readFileSync('node_modules/' + options.module + '/package.json'));
+	let projectPackageJson = JSON.parse(fs.readFileSync('package.json'));
+	let modulePackageJson = JSON.parse(fs.readFileSync('node_modules/' + options.module + '/package.json'));
 
 	var projectVersion;
 
@@ -49,11 +49,11 @@ function checkModuleVersion(options) {
 		projectVersion = projectPackageJson.devDependencies[options.module];
 	}
 
-	var projectVersionOnly = projectVersion.replace(/[\^]|[\~]|[\#]|[\+]|[\:]|[\/]|[\.]|[\-]|[a-z]/g, "");
+	let projectVersionOnly = projectVersion.replace(/[\^]|[\~]|[\#]|[\+]|[\:]|[\/]|[\.]|[\-]|[a-z]/g, "");
 
-	var moduleVerson = modulePackageJson.version;
+	let moduleVerson = modulePackageJson.version;
 
-	var moduleVersionOnly = moduleVerson.replace(/[\^]|[\~]|[\#]|[\+]|[\:]|[\/]|[\.]|[\-]|[a-z]/g, "");
+	let moduleVersionOnly = moduleVerson.replace(/[\^]|[\~]|[\#]|[\+]|[\:]|[\/]|[\.]|[\-]|[a-z]/g, "");
 
 	if (projectVersionOnly != moduleVersionOnly) {
 		throw new Error(gutil.colors.red('ERROR: ') + gutil.colors.cyan(options.module) + ' version is not equal to ' + gutil.colors.cyan(options.module) + ' in your node_modules folder\n\n');

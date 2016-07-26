@@ -1,10 +1,10 @@
 'use strict';
 
-var gulp = require('gulp'),
-	plumber = require('gulp-plumber'),
-	imagemin = require('gulp-imagemin'),
-	pngquant = require('imagemin-pngquant'),
-	assign = require('object-assign');
+const gulp = require('gulp');
+const plumber = require('gulp-plumber');
+const imagemin = require('gulp-imagemin');
+const pngquant = require('imagemin-pngquant');
+const assign = require('object-assign');
 
 function handymanImgMin(options) {
 	if (typeof options === 'undefined') {

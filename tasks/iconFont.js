@@ -1,11 +1,11 @@
 'use strict';
 
-var gulp = require('gulp'),
-	plumber = require('gulp-plumber'),
-	iconfont = require('gulp-iconfont'),
-	consolidate = require('gulp-consolidate'),
-	rename = require('gulp-rename'),
-	assign = require('object-assign');
+const gulp = require('gulp');
+const plumber = require('gulp-plumber');
+const iconfont = require('gulp-iconfont');
+const consolidate = require('gulp-consolidate');
+const rename = require('gulp-rename');
+const assign = require('object-assign');
 
 function handymanIconFont(iconFontOptions, done) {
 
@@ -42,7 +42,7 @@ function handymanIconFont(iconFontOptions, done) {
 	}, iconFontOptions);
 
 
-	var runTimestamp = Math.round(Date.now()/1000);
+	let runTimestamp = Math.round(Date.now()/1000);
 
 	return gulp.src([iconFontOptions.pathToSrc + '/*.svg'])
 		.pipe(iconfont({

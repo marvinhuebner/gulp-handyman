@@ -1,15 +1,14 @@
 'use strict';
 
-var check = require('./src/check.js');
-var handymanSass = require('./tasks/sass.js');
-var handymanJs = require('./tasks/javaScript.js');
-var handymanPug = require('./tasks/pug.js');
-var handymanImgMin = require('./tasks/imgMin.js');
-var handymanIconFont = require('./tasks/iconFont.js');
-var handymanFavicon = require('./tasks/favicon.js');
-var handymanSvgSprite = require('./tasks/svgSprite.js');
+const check = require('./src/check.js');
+const handymanSass = require('./tasks/sass.js');
+const handymanJs = require('./tasks/javaScript.js');
+const handymanPug = require('./tasks/pug.js');
+const handymanImgMin = require('./tasks/imgMin.js');
+const handymanIconFont = require('./tasks/iconFont.js');
+const handymanFavicon = require('./tasks/favicon.js');
+const handymanSvgSprite = require('./tasks/svgSprite.js');
 
-// Function for testing of version in package.json is the same as in the node modules folder
 module.exports.checkEqualVersion = check.equalVersionModule;
 
 module.exports.gulpSass = handymanSass.gulpSass;

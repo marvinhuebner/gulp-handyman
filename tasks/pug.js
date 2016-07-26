@@ -1,9 +1,9 @@
 'use strict';
 
-var gulp = require('gulp'),
-	plumber = require('gulp-plumber'),
-	pug = require('gulp-pug'),
-	assign = require('object-assign');
+const gulp = require('gulp');
+const plumber = require('gulp-plumber');
+const pug = require('gulp-pug');
+const assign = require('object-assign');
 
 function handymanPug(options) {
 	if (typeof options === 'undefined') {
@@ -24,7 +24,7 @@ function handymanPug(options) {
 		minify: false
 	}, options);
 
-	var pugOutputStyle;
+	let pugOutputStyle;
 
 	if (options.minify == false) {
 		pugOutputStyle = true;

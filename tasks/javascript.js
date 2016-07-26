@@ -1,14 +1,14 @@
 'use strict';
 
-var gulp = require('gulp'),
-	plumber = require('gulp-plumber'),
-	sourcemaps = require('gulp-sourcemaps'),
-	concat = require('gulp-concat'),
-	uglify = require('gulp-uglify'),
-	babel = require('gulp-babel'),
-	gulpif = require('gulp-if'),
-	assign = require('object-assign'),
-	es2015Preset = require('babel-preset-es2015');
+const gulp = require('gulp');
+const plumber = require('gulp-plumber');
+const sourcemaps = require('gulp-sourcemaps');
+const concat = require('gulp-concat');
+const uglify = require('gulp-uglify');
+const babel = require('gulp-babel');
+const gulpif = require('gulp-if');
+const assign = require('object-assign');
+const es2015Preset = require('babel-preset-es2015');
 
 function handymanJS(options) {
 	if (typeof options === 'undefined') {

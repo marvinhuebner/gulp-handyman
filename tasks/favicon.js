@@ -1,8 +1,8 @@
 'use strict';
 
-var gulp = require('gulp'),
-	favicons = require('gulp-favicons'),
-	assign = require('object-assign');
+const gulp = require('gulp');
+const favicons = require('gulp-favicons');
+const assign = require('object-assign');
 
 function handymanFavicon(options) {
 	if (typeof options === 'undefined') {

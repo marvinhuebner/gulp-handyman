@@ -1,10 +1,9 @@
 'use strict';
 
-var gulp = require('gulp'),
-	plumber = require('gulp-plumber'),
-	svgSprite = require('gulp-svg-sprite'),
-	assign = require('object-assign');
-
+const gulp = require('gulp');
+const plumber = require('gulp-plumber');
+const svgSprite = require('gulp-svg-sprite');
+const assign = require('object-assign');
 
 function handymanSvgSprite(options) {
 	if (typeof options === 'undefined') {
@@ -26,7 +25,7 @@ function handymanSvgSprite(options) {
 		pathToDestScss: ''
 	}, options);
 
-	var config;
+	let config;
 
 	config = {
 		shape: {
