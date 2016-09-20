@@ -2,12 +2,12 @@
 
 const check = require('./src/check.js');
 const handymanSass = require('./tasks/sass.js');
-const handymanJs = require('./tasks/javaScript.js');
+const handymanJs = require('./tasks/javascript.js');
 const handymanPug = require('./tasks/pug.js');
-const handymanImgMin = require('./tasks/imgMin.js');
-const handymanIconFont = require('./tasks/iconFont.js');
+const handymanImgMin = require('./tasks/imgsin.js');
+const handymanIconFont = require('./tasks/iconfont.js');
 const handymanFavicon = require('./tasks/favicon.js');
-const handymanSvgSprite = require('./tasks/svgSprite.js');
+const handymanSvgSprite = require('./tasks/svgsprite.js');
 
 module.exports.checkEqualVersion = check.equalVersionModule;
 
