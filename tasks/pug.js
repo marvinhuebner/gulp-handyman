@@ -4,6 +4,7 @@ const gulp = require('gulp');
 const plumber = require('gulp-plumber');
 const pug = require('gulp-pug');
 const assign = require('object-assign');
+const gutil = require('gulp-util');
 
 function handymanPug(options) {
 	if (typeof options === 'undefined') {
@@ -21,7 +22,8 @@ function handymanPug(options) {
 	options = assign({
 		pathToSrc: '',
 		pathToDest: '',
-		minify: false
+		minify: false,
+		plumberEnv: false
 	}, options);
 
 	let pugOutputStyle;
@@ -32,13 +34,21 @@ function handymanPug(options) {
 		pugOutputStyle = false;
 	}
 
+	var plumberConf = {};
+
+	if (options.plumberEnv) {
+		plumberConf.errorHandler = function(err) {
+			throw err;
+		};
+	} else {
+		plumberConf.errorHandler = function(err) {
+			gutil.log(err);
+			this.emit('end');
+		};
+	}
+
 	return gulp.src(options.pathToSrc + '/!(_)*.pug')
-		.pipe(plumber({
-			errorHandler: function(err) {
-				console.log(err);
-				this.emit('end');
-			}
-		}))
+		.pipe(plumber(plumberConf))
 		.pipe(pug({
 			pretty: pugOutputStyle
 		}))

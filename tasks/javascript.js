@@ -9,6 +9,7 @@ const babel = require('gulp-babel');
 const gulpif = require('gulp-if');
 const assign = require('object-assign');
 const es2015Preset = require('babel-preset-es2015');
+const gutil = require('gulp-util');
 
 function handymanJS(options) {
 	if (typeof options === 'undefined') {
@@ -29,17 +30,25 @@ function handymanJS(options) {
 		pathToDest: '',
 		minify: false,
 		babel: false,
-		sourcemaps: true
+		sourcemaps: true,
+		plumberEnv: false
 	}, options);
 
+	var plumberConf = {};
+
+	if (options.plumberEnv) {
+		plumberConf.errorHandler = function(err) {
+			throw err;
+		};
+	} else {
+		plumberConf.errorHandler = function(err) {
+			gutil.log(err);
+			this.emit('end');
+		};
+	}
 
 	return gulp.src(options.pathToSrc)
-		.pipe(plumber({
-			errorHandler: function(err) {
-				console.log(err);
-				this.emit('end');
-			}
-		}))
+		.pipe(plumber(plumberConf))
 		.pipe(gulpif(options.sourcemaps, sourcemaps.init()))
 		.pipe(gulpif(options.babel, babel({"presets": [es2015Preset]})))
 		.pipe(concat(options.fileName + '.js'))

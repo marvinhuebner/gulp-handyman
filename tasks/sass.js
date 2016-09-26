@@ -8,6 +8,7 @@ const autoprefixer = require('gulp-autoprefixer');
 const rename = require('gulp-rename');
 const gulpif = require('gulp-if');
 const assign = require('object-assign');
+const gutil = require('gulp-util');
 
 function handymanSass(options) {
 	if (typeof options === 'undefined') {
@@ -27,7 +28,8 @@ function handymanSass(options) {
 		pathToDest: '',
 		minify: false,
 		fileName: '',
-		sourcemaps: true
+		sourcemaps: true,
+		plumberEnv: false
 	}, options);
 
 	let fileNameRename;
@@ -46,13 +48,22 @@ function handymanSass(options) {
 		sassOutputStyle = 'compressed';
 	}
 
+	var plumberConf = {};
+
+	if (options.plumberEnv) {
+		plumberConf.errorHandler = function(err) {
+			throw err;
+		};
+	} else {
+		plumberConf.errorHandler = function(err) {
+			gutil.log(err);
+			this.emit('end');
+		};
+	}
+
+
 	return gulp.src(options.pathToSrc)
-		.pipe(plumber({
-			errorHandler: function(err) {
-				console.log(err);
-				this.emit('end');
-			}
-		}))
+		.pipe(plumber(plumberConf))
 		.pipe(gulpif(options.sourcemaps, sourcemaps.init()))
 		.pipe(sass({outputStyle: sassOutputStyle}))
 		.pipe(autoprefixer())
