@@ -10,11 +10,17 @@
     "type": "git",
     "url": "https://git.bergwerk.ag/frameworks-libarys/gulp-handyman.git"
   },
+  "engines": {
+    "node": ">=5.2.0"
+  },
+  "author": {
+    "name": "Marvin Hübner",
+    "email": "mjh@bergwerk.ag"
+  },
   "keywords": [
     "frontend",
     "handyman"
   ],
-  "author": "MJH",
   "dependencies": {
     "babel-core": "^6.11.4",
     "babel-preset-es2015": "^6.9.0",
