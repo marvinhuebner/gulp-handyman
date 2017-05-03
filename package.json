@@ -1,6 +1,6 @@
 {
   "name": "gulp-handyman",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "gulp handyman will handle all gulp tasks for frontend developement",
   "main": "index.js",
   "scripts": {
