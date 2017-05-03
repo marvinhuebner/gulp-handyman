@@ -29,7 +29,8 @@ function handymanSass(options) {
 		minify: false,
 		fileName: '',
 		sourcemaps: true,
-		plumberEnv: false
+		plumberEnv: false,
+		autoprefixer: ['last 2 versions', 'ie >= 9', 'ios >= 7']
 	}, options);
 
 	let fileNameRename;
@@ -61,12 +62,13 @@ function handymanSass(options) {
 		};
 	}
 
-
 	return gulp.src(options.pathToSrc)
 		.pipe(plumber(plumberConf))
 		.pipe(gulpif(options.sourcemaps, sourcemaps.init()))
 		.pipe(sass({outputStyle: sassOutputStyle}))
-		.pipe(autoprefixer())
+		.pipe(autoprefixer({
+			browsers: options.autoprefixer
+		}))
 		.pipe(gulpif(fileNameRename, rename(options.fileName + '.css')))
 		.pipe(gulpif(options.sourcemaps, sourcemaps.write('./')))
 		.pipe(gulp.dest(options.pathToDest));
